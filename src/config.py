@@ -1,9 +1,9 @@
 """
 create Pydantic models
 """
-from typing import List
 
 from pydantic import BaseModel, validator
+from scipy.stats import loguniform
 
 
 def must_be_non_negative(v: float) -> float:
@@ -55,8 +55,8 @@ class ProcessConfig(BaseModel):
 class ModelParams(BaseModel):
     """Specify the parameters of the `train` flow"""
 
-    C: List[float] = [0.1, 1, 10, 100, 1000]
-    gamma: List[float] = [1, 0.1, 0.01, 0.001, 0.0001]
+    C: list[float] = [1, 10]
+    gamma: list[float] = [1, 0.1]
 
     _validated_fields = validator("*", allow_reuse=True, each_item=True)(
         must_be_non_negative

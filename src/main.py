@@ -1,5 +1,5 @@
 """
-Create an iris flow
+Create a flow
 """
 from prefect import flow
 
@@ -10,7 +10,7 @@ from train_model import train
 
 
 @flow
-def iris_flow(
+def fruit_classification_flow(
     location: Location = Location(),
     process_config: ProcessConfig = ProcessConfig(),
     model_params: ModelParams = ModelParams(),
@@ -32,4 +32,4 @@ def iris_flow(
 
 
 if __name__ == "__main__":
-    iris_flow()
+    fruit_classification_flow()

@@ -1,6 +1,7 @@
 """Python script to process the data"""
 
 import os
+from typing import Union
 
 import cv2
 import joblib
@@ -8,12 +9,13 @@ import numpy as np
 import pandas as pd
 from prefect import flow, task
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 from config import Location, ProcessConfig
 
 
 @task
-def load_fruit_images(fruits: list[str], path: str, dim: int = 100):
+def load_fruit_images(fruits: list[str], path: str, dim: int = 100) -> tuple:
     if not os.path.exists(path):
         raise ValueError(f"Path '{path}' does not exist.")
 
@@ -35,7 +37,15 @@ def load_fruit_images(fruits: list[str], path: str, dim: int = 100):
 
 
 @task
-def split_train_test(X: pd.DataFrame, y: pd.DataFrame, test_size: int):
+def scale_data(train_data: np.ndarray, test_data: np.ndarray) -> tuple:
+    scaler = StandardScaler()
+    scaled_train = scaler.fit_transform([i.flatten() for i in train_data])
+    scaled_test = scaler.transform([i.flatten() for i in test_data])
+    return scaled_train, scaled_test
+
+
+@task
+def split_train_test(X: pd.DataFrame, y: pd.DataFrame, test_size: int) -> dict:
     """_summary_
 
     Parameters
@@ -89,11 +99,14 @@ def process(
     X_train, y_train = load_fruit_images(
         config.fruits, location.train_data_raw
     )
-    X_val, y_val = load_fruit_images(config.fruits, location.test_data_raw)
-    validation_data = pd.concat([X_val, y_val], axis=1)  # type: ignore
+
     split_data = split_train_test(X_train, y_train, config.test_size)  # type: ignore
+
+    split_data["X_train"], split_data["X_test"] = scale_data(
+        split_data["X_train"], split_data["X_test"]
+    )
+
     save_processed_data(split_data, location.data_process)
-    save_processed_data(validation_data, location.data_process)
 
 
 if __name__ == "__main__":

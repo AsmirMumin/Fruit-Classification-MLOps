@@ -24,11 +24,11 @@ docs_save:
 	@echo Save documentation to docs... 
 	PYTHONPATH=src pdoc src -o docs
 
-data/processed/xy.pkl: data/raw src/process.py
+data/processed/fruits.pkl: data/raw src/process.py
 	@echo "Processing data..."
 	python src/process.py
 
-models/svc.pkl: data/processed/xy.pkl src/train_model.py
+models/svc.pkl: data/processed/fruits.pkl src/train_model.py
 	@echo "Training model..."
 	python src/train_model.py
 

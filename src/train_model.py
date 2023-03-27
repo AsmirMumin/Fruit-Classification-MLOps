@@ -36,22 +36,22 @@ def train_model(
     y_train : pd.Series
         Label for training
     """
-    grid = GridSearchCV(SVC(), model_params.dict(), refit=True, verbose=3)
-    grid.fit(X_train, y_train)
-    return grid
+    search = GridSearchCV(SVC(), model_params.dict(), refit=True, verbose=3)
+    search.fit(X_train, y_train)
+    return search
 
 
 @task
-def predict(grid: GridSearchCV, X_test: pd.DataFrame):
+def predict(search: GridSearchCV, X_test: pd.DataFrame):
     """_summary_
 
     Parameters
     ----------
-    grid : GridSearchCV
+    search : GridSearchCV
     X_test : pd.DataFrame
         Features for testing
     """
-    return grid.predict(X_test)
+    return search.predict(X_test)
 
 
 @task
@@ -67,7 +67,7 @@ def save_model(model: GridSearchCV, save_path: str):
 
 
 @task
-def save_predictions(predictions: np.array, save_path: str):
+def save_predictions(predictions: np.array, save_path: str):  # type: ignore
     """Save predictions to a specified location
 
     Parameters
