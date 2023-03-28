@@ -1,7 +1,6 @@
 """Python script to process the data"""
 
 import os
-from typing import Union
 
 import cv2
 import joblib
@@ -41,7 +40,7 @@ def scale_data(train_data: np.ndarray, test_data: np.ndarray) -> tuple:
     scaler = StandardScaler()
     scaled_train = scaler.fit_transform([i.flatten() for i in train_data])
     scaled_test = scaler.transform([i.flatten() for i in test_data])
-    return scaled_train, scaled_test
+    return scaled_train, scaled_test, scaler
 
 
 @task
@@ -66,6 +65,11 @@ def split_train_test(X: pd.DataFrame, y: pd.DataFrame, test_size: int) -> dict:
         "y_train": y_train,
         "y_test": y_test,
     }
+
+
+@task
+def save_scaler(scaler: StandardScaler, save_location: str):
+    joblib.dump(scaler, save_location)
 
 
 @task
@@ -102,10 +106,11 @@ def process(
 
     split_data = split_train_test(X_train, y_train, config.test_size)  # type: ignore
 
-    split_data["X_train"], split_data["X_test"] = scale_data(
+    split_data["X_train"], split_data["X_test"], scaler = scale_data(
         split_data["X_train"], split_data["X_test"]
     )
 
+    save_scaler(scaler, location.scaler)
     save_processed_data(split_data, location.data_process)
 
 
