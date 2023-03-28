@@ -56,6 +56,9 @@ Classes
     `output_notebook: str`
     :
 
+    `scaler: str`
+    :
+
     `test_data_raw: str`
     :
 

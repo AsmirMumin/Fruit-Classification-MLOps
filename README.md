@@ -17,12 +17,22 @@ To install new PyPI packages, run:
 ```bash
 poetry add <package-name>
 ```
+
+### Get data
+The data is stored in a gdrive folder. 
+
+To retrieve the data, simply type
+```
+dvc pull
+```
+to pull the data from the remote storage. That’s it!
+
 ### Run Python scripts
 To run the Python scripts to process data, train model, and run a notebook, type the following:
 ```bash
 make pipeline
 ```
-### Run Python scripts
+### Create and run API
 To create an API, type the following:
 ```bash
 make api
@@ -44,18 +54,12 @@ To view your flow runs from a UI, sign in to your [Prefect Cloud](https://app.pr
 ```bash
 prefect orion start
 ```
-Open the URL http://127.0.0.1:4200/, and you should see the Prefect UI:
+Open the URL http://127.0.0.1:4200/, and you should see the Prefect UI.
 
-![](images/prefect_cloud.png)
 
 ### Run flows from the UI
 
-After [creating a deployment](https://towardsdatascience.com/build-a-full-stack-ml-application-with-pydantic-and-prefect-915f00fe0c62?sk=b1f8c5cb53a6a9d7f48d66fa778e9cf0), you can run a flow from the UI with default parameters:
-
-![](https://miro.medium.com/max/1400/1*KPRQS3aeuYhL_Anv3-r9Ag.gif)
-or custom parameters:
-![](https://miro.medium.com/max/1400/1*jGKmPR3aoXeIs3SEaHPhBg.gif)
-
+After creating a deployment, you can run a flow from the UI with default parameters.
 ### Auto-generate API documentation
 
 To auto-generate API document for your project, run:

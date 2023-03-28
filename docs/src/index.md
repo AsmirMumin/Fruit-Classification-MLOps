@@ -4,6 +4,7 @@ Source code of your project
 
 Sub-modules
 -----------
+* src.app
 * src.config
 * src.main
 * src.process

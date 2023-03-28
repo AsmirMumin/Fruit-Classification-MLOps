@@ -10,7 +10,7 @@ Functions
 :   
 
     
-`process(location: config.Location = Location(train_data_raw='data/raw/fruits-360/Training', test_data_raw='data/raw/fruits-360/Test', data_process='data/processed/fruits.pkl', data_final='data/final/predictions.pkl', model='models/svc.pkl', input_notebook='notebooks/analyze_results.ipynb', output_notebook='notebooks/results.ipynb'), config: config.ProcessConfig = ProcessConfig(fruits=['apple', 'banana'], test_size=0.3))`
+`process(location: config.Location = Location(train_data_raw='data/raw/fruits-360/Training', test_data_raw='data/raw/fruits-360/Test', data_process='data/processed/fruits.pkl', data_final='data/final/predictions.pkl', model='models/svc.pkl', scaler='processors/scaler.pkl', input_notebook='notebooks/analyze_results.ipynb', output_notebook='notebooks/results.ipynb'), config: config.ProcessConfig = ProcessConfig(fruits=['apple', 'banana'], test_size=0.3))`
 :   Flow to process the ata
     
     Parameters
@@ -32,7 +32,11 @@ Functions
         Where to save the data
 
     
-`scale_data(train_data: numpy.ndarray, test_data: numpy.ndarray, val_data: numpy.ndarray) ‑> tuple`
+`save_scaler(scaler: sklearn.preprocessing._data.StandardScaler, save_location: str)`
+:   
+
+    
+`scale_data(train_data: numpy.ndarray, test_data: numpy.ndarray) ‑> tuple`
 :   
 
     
