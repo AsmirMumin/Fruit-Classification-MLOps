@@ -39,7 +39,8 @@ make api
 ```
 We can now interact with the API by going to http://127.0.0.1:8000/docs and clicking the “Try it out” button:
 ![](images/api.png)
-Insert the following value:
+
+You have to provide the image path. The image should live in this project. For example insert the following value:
 ```
 {
   "img_path": "data/raw/fruits-360/Test/Apple Braeburn/3_100.jpg"
