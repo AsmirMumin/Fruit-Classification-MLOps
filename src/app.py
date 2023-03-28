@@ -66,12 +66,9 @@ async def predict(request: Img):
 
 def log_fruit_count():
     while True:
-        # Log the fruit count
         logging.info(f"Fruit count: {fruit_count}")
-        # Reset the fruit count
         fruit_count["apple"] = 0
         fruit_count["banana"] = 0
-        # Wait for 30 seconds before logging again
         time.sleep(30)
 
 
