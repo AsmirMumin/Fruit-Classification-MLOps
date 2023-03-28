@@ -93,8 +93,8 @@ def train(
         Configurations for training the model, by default ModelParams()
     """
     data = get_processed_data(location.data_process)
-    model = train_model(svc_params, data["X_train"], data["y_train"])
-    predictions = predict(model, data["X_test"])
+    model = train_model(svc_params, data["X_train"], data["y_train"])  # type: ignore
+    predictions = predict(model, data["X_test"])  # type: ignore
     save_model(model, save_path=location.model)
     save_predictions(predictions, save_path=location.data_final)
 

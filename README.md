@@ -22,6 +22,21 @@ To run the Python scripts to process data, train model, and run a notebook, type
 ```bash
 make pipeline
 ```
+### Run Python scripts
+To create an API, type the following:
+```bash
+make api
+```
+We can now interact with the API by going to http://127.0.0.1:8000/docs and clicking the “Try it out” button:
+![](images/api.png)
+Insert the following value:
+```
+{
+  "img_path": "data/raw/fruits-360/Test/Apple Braeburn/3_100.jpg"
+}
+```
+... to the Request body, which should give you "apple" as a response. This means the model correctly predicts that the image 3_100.jpg is an apple.
+
 ### View all flow runs
 A [flow](https://docs.prefect.io/concepts/flows/) is the basis of all Prefect workflows.
 

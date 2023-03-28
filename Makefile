@@ -38,6 +38,10 @@ notebooks/results.ipynb: models/svc.pkl src/run_notebook.py
 
 pipeline: data/processed/fruits.pkl models/svc.pkl notebooks/results.ipynb
 
+api: 
+	@echo "Creating an API..."
+	python src/app.py		
+
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete

@@ -4,8 +4,7 @@ import cv2
 import joblib
 import numpy as np
 import uvicorn
-from fastapi import FastAPI, File, HTTPException, UploadFile
-from PIL import Image
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from config import Location
